@@ -1,0 +1,8 @@
+{
+ "system": "whisper-tiny",
+ "model": "openai/whisper-tiny",
+ "prompt": false,
+ "seconds": 32.7,
+ "device": "cuda",
+ "n": 436
+}

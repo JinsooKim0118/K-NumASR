@@ -1,0 +1,8 @@
+{
+ "system": "whisper-large-v3-turbo+NumPrompt",
+ "model": "openai/whisper-large-v3-turbo",
+ "prompt": true,
+ "seconds": 94.0,
+ "device": "cuda",
+ "n": 436
+}

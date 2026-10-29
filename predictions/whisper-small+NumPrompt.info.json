@@ -1,0 +1,8 @@
+{
+ "system": "whisper-small+NumPrompt",
+ "model": "openai/whisper-small",
+ "prompt": true,
+ "seconds": 166.5,
+ "device": "cuda",
+ "n": 436
+}

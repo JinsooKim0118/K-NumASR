@@ -1,0 +1,8 @@
+{
+ "system": "whisper-large-v3",
+ "model": "openai/whisper-large-v3",
+ "prompt": false,
+ "seconds": 76.5,
+ "device": "cuda",
+ "n": 436
+}

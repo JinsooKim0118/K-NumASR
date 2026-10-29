@@ -1,0 +1,8 @@
+{
+ "system": "wav2vec2-xlsr-ko",
+ "model": "kresnik/wav2vec2-large-xlsr-korean",
+ "prompt": false,
+ "seconds": 30.5,
+ "device": "cuda",
+ "n": 436
+}

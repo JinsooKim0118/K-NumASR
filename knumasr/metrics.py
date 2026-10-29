@@ -50,6 +50,7 @@ def edit_distance(a, b):
 def score_utterance(ref, hyp):
     r, h = normalize_text(ref), normalize_text(hyp)
     rn, hn = extract_numbers(ref), extract_numbers(hyp)
+    rn_itn = extract_numbers(korean_itn(ref))
     hn_itn = extract_numbers(korean_itn(hyp))
     rd, hd = "".join(rn), "".join(hn)
     return {
@@ -58,7 +59,7 @@ def score_utterance(ref, hyp):
         "digit_err": edit_distance(rd, hd),
         "digit_len": len(rd),
         "nem": int(rn == hn),
-        "nem_norm": int(rn == hn_itn),
+        "nem_norm": int(rn_itn == hn_itn),
     }
 
 

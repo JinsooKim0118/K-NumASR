@@ -16,14 +16,14 @@ PARTICLE_NEXT = "이가은는을를에의와과도만로으부까쯤씩째반입
 _BOUNDARY = rf"(?=$|[^가-힣]|[{PARTICLE_NEXT}])"
 
 _SINO_CHARS = "".join(SINO_DIGITS) + "".join(SMALL) + "".join(BIG)
-_NUM_TOKEN = rf"(?:\d[\d,]*|[{_SINO_CHARS}])"
+_NUM_TOKEN = rf"(?:(?>\d[\d,]*)|[{_SINO_CHARS}])"
 _SINO_SPAN = rf"{_NUM_TOKEN}(?:\s?{_NUM_TOKEN})*"
 _SINO_COUNTER_RE = "|".join(sorted(SINO_COUNTERS, key=len, reverse=True))
 _NATIVE_COUNTER_RE = "|".join(sorted(NATIVE_COUNTERS, key=len, reverse=True))
 
 SINO_WITH_COUNTER = re.compile(rf"(?<![가-힣])({_SINO_SPAN})(\s?)({_SINO_COUNTER_RE}){_BOUNDARY}")
 DIGIT_SEQUENCE = re.compile(rf"(?<![가-힣])([{''.join(SINO_DIGITS)}]+(?:[\s\-][{''.join(SINO_DIGITS)}]+)*){_BOUNDARY}")
-MIXED_UNITS = re.compile(rf"(?<![가-힣\d])(\d[\d,]*\s?[{''.join(SMALL)}{''.join(BIG)}](?:\s?(?:\d[\d,]*|[{''.join(SMALL)}{''.join(BIG)}]))*)")
+MIXED_UNITS = re.compile(rf"(?<![가-힣\d])((?>\d[\d,]*)\s?[{''.join(SMALL)}{''.join(BIG)}](?:\s?(?:(?>\d[\d,]*)|[{''.join(SMALL)}{''.join(BIG)}]))*)")
 
 _tens = "|".join(sorted(NATIVE_TENS, key=len, reverse=True))
 _ones = "|".join(sorted(NATIVE_ONES, key=len, reverse=True))
@@ -38,7 +38,10 @@ def _tokens(span):
     out = []
     for tok in re.findall(rf"\d[\d,]*|[{_SINO_CHARS}]", span):
         if tok[0].isdigit():
-            out.append(("num", int(tok.replace(",", ""))))
+            digits = tok.replace(",", "")
+            if not digits or len(digits) > 18:
+                return []
+            out.append(("num", int(digits)))
         elif tok in SINO_DIGITS:
             out.append(("num", SINO_DIGITS[tok]))
         elif tok in SMALL:

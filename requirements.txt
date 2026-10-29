@@ -9,3 +9,4 @@ numpy
 pandas
 edge-tts
 uroman
+rapidfuzz

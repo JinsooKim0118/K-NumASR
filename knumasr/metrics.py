@@ -27,7 +27,15 @@ def extract_numbers(text):
     return re.findall(r"\d+", normalize_numbers(text))
 
 
+try:
+    from rapidfuzz.distance import Levenshtein as _lev
+except ImportError:
+    _lev = None
+
+
 def edit_distance(a, b):
+    if _lev is not None:
+        return _lev.distance(a, b)
     if len(a) < len(b):
         a, b = b, a
     prev = list(range(len(b) + 1))

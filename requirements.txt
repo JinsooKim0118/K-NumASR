@@ -1,0 +1,11 @@
+torch
+transformers>=4.44
+accelerate
+huggingface_hub
+datasets
+soundfile
+librosa
+numpy
+pandas
+edge-tts
+uroman
